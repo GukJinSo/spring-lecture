@@ -1,9 +1,11 @@
 package gukjin.springlecture.repo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import gukjin.springlecture.domain.Member;
 
@@ -33,7 +35,11 @@ public class MemoryMemberRepository implements MemberRepository {
 
 	@Override
 	public List<Member> findAll() {
-		return null;
+		return new ArrayList<>(store.values());
+	}
+	
+	public void clear() {
+		this.store.clear();
 	}
 
 }
