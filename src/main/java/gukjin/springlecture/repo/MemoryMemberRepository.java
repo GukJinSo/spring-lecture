@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Repository;
 
 import gukjin.springlecture.domain.Member;
 
@@ -14,8 +15,6 @@ public class MemoryMemberRepository implements MemberRepository {
 	private static Map<Long, Member> store = new HashMap<>();
 	private static long sequnce = 0L;
 	
-	
-
 	@Override
 	public Member save(Member member) {
 		member.setId(++sequnce);

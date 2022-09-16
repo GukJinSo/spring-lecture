@@ -17,7 +17,6 @@ public class MemberController {
 	
 	private MemberService memberService;
 	
-	
 	@Autowired
 	public MemberController(MemberService memberService) {
 		this.memberService = memberService;
@@ -31,8 +30,7 @@ public class MemberController {
 	@PostMapping("member/new")
 	private String create(MemberForm form) {
 		Member member = new Member();
-		//memberService.join(member);
-		
+		memberService.join(member);
 		return "";  
 	}
 	

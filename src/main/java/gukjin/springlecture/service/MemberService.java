@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import gukjin.springlecture.domain.Member;
-import gukjin.springlecture.repo.MemoryMemberRepository;
+import gukjin.springlecture.repo.MemberRepository;
 
 public class MemberService {
 	
-	private final MemoryMemberRepository memberRepo;
+	private final MemberRepository memberRepo;
 	
-	public MemberService (MemoryMemberRepository memberRepo) {
+	public MemberService (MemberRepository memberRepo) {
 		this.memberRepo = memberRepo;
 	}
 	
