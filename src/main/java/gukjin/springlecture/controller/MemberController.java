@@ -1,6 +1,7 @@
 package gukjin.springlecture.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,24 +23,24 @@ public class MemberController {
 		this.memberService = memberService;
 	}
 	
-	@GetMapping("member/new")
-	private String memberForm() {
-		return "member/memberForm";
+	@GetMapping(value = "/members/new")
+	private String createForm() {
+		return "members/createMemberForm";
 	}
 	
-	@PostMapping("member/new")
-	private String create(MemberForm form) {
-		Member member = new Member();
-		memberService.join(member);
-		return "";  
+	@PostMapping(value = "/members/new")
+	public String create(MemberForm form) {
+		 Member member = new Member();
+		 member.setName(form.getName());
+		 memberService.join(member);
+		 return "redirect:/";
 	}
 	
-	@GetMapping("member/memberList")
-	private String memberList(Model model) {
-		
-		//List<Member> members = memberService.
-		//model.addAttribute("members", member)
-		return "member/memberList";
+	@GetMapping(value = "/members")
+	public String list(Model model) {
+		List<Member> members = memberService.findMembers();
+		model.addAttribute("members", members);
+		return "members/memberList";
 	}
 
 }
