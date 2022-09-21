@@ -26,8 +26,19 @@ public class JdbcTemplateMemberRepository implements MemberRepository {
 		return null;
 	}
 	
-	/*
 	private RowMapper<Member> memberRowMapper(){
+		return new RowMapper<Member>() {
+			@Override
+			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Member member = new Member();
+				member.setId(rs.getLong("id"));
+				member.setName(rs.getString("name"));
+				return member;
+			}
+		};
+	}
+	
+	private RowMapper<Member> memberRowMapper2(){
 		return (rs, rowNum) -> {
 			Member member = new Member();
 			member.setId(rs.getLong("id"));
@@ -35,16 +46,12 @@ public class JdbcTemplateMemberRepository implements MemberRepository {
 			return member;
 		};
 	}
-	*/
+	
+	
 	
 	@Override
 	public Optional<Member> findById(Long id) {
-		List<Member> result = jdbcTemplate.query("select * from member where id = ?", (rs, rowNum) -> {
-			Member member = new Member();
-			member.setId(rs.getLong("id"));
-			member.setName(rs.getString("name"));
-			return member;
-		});
+		List<Member> result = jdbcTemplate.query("select * from member where id = ?", memberRowMapper());
 		return result.stream().findAny();
 	}
 
