@@ -6,6 +6,9 @@ import java.util.Optional;
 import gukjin.springlecture.domain.Member;
 import gukjin.springlecture.repo.MemberRepository;
 
+import javax.transaction.Transactional;
+
+@Transactional
 public class MemberService {
 	
 	private final MemberRepository memberRepo;
